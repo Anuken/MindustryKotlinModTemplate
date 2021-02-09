@@ -6,7 +6,7 @@ buildscript{
     }
 
     ext{
-        kotlinVersion = "1.4.21"
+        kotlinVersion = "1.4.30"
         //the build number that this mod is made for
         mindustryVersion = 'v123'
         //version of SDK you will be using
@@ -36,7 +36,6 @@ repositories{
 dependencies{
     compileOnly "com.github.Anuken.Arc:arc-core:$mindustryVersion"
     compileOnly "com.github.Anuken.Mindustry:core:$mindustryVersion"
-    api "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 }
 
 task jarAndroid{
