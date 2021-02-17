@@ -14,12 +14,14 @@ class ExampleKotlinMod : Mod(){
         //listen for game load event
         Events.on(ClientLoadEvent::class.java){
             //show dialog upon startup
-            Time.runTask(10f) {
+            Time.runTask(10f){
                 BaseDialog("frog").apply{
-                    cont.add("behold").row()
-                    //mod sprites are prefixed with the mod name (this mod is called 'example-java-mod' in its config)
-                    cont.image(Core.atlas.find("example-kotlin-mod-frog")).pad(20f).row()
-                    cont.button("I see"){ hide() }.size(100f, 50f)
+                    cont.apply{
+                        add("behold").row()
+                        //mod sprites are prefixed with the mod name (this mod is called 'example-kotlin-mod' in its config)
+                        image(Core.atlas.find("example-kotlin-mod-frog")).pad(20f).row()
+                        button("I see"){ hide() }.size(100f, 50f)
+                    }
                     show()
                 }
             }
