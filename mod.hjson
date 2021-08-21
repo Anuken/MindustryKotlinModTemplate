@@ -1,8 +1,20 @@
-name: "example-kotlin-mod"
-displayName: "Example Kotlin Mod"
-author: "Anuke"
-main: "example.ExampleKotlinMod"
-description: "A Kotlin jar mod."
-version: "1.0"
-minGameVersion: 120
+#the mod name as displayed in-game
+displayName: "Kotlin Mod Template"
 
+#the internal name of your mod
+name: "example-kotlin-mod"
+
+#your name
+author: "You"
+
+#the fully qualified main class of the mod
+main: "example.ExampleKotlinMod"
+
+#the mod description as seen in the mod dialog
+description: "A Mindustry Kotlin mod template."
+
+#the mod version
+version: 1.0
+
+#the minimum game build required to run this mod
+minGameVersion: 129
