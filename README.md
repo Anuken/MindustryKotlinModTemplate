@@ -1,4 +1,4 @@
-# ExampleKotlinMod
+# Mindustry Kotlin Mod Template
 A Kotlin Mindustry mod that works on Android and PC. This is equivalent to the [Java](https://github.com/Anuken/ExampleJavaMod) version, except in Kotlin.
 
 ## Building for Desktop Testing
