@@ -2,13 +2,13 @@ version '1.0'
 
 buildscript{
     repositories{
-        mavenCentral()
+		mavenCentral()
     }
     
     ext{
         //the build number that this mod is made for
-        mindustryVersion = 'v146'
-        kotlinVersion = "1.5.21"
+        mindustryVersion = 'v150.1'
+        kotlinVersion = "2.2.0"
         sdkRoot = System.getenv("ANDROID_HOME") ?: System.getenv("ANDROID_SDK_ROOT")
     }
     
