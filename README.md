@@ -3,7 +3,7 @@ A Kotlin Mindustry mod that works on Android and PC. This is equivalent to the [
 
 ## Building for Desktop Testing
 
-1. Install JDK 14. If you don't know how, look it up. If you already have any version of the JDK >= 8, that works as well. 
+1. Install JDK 17.
 2. Run `gradlew jar` [1].
 3. Your mod jar will be in the `build/libs` directory. **Only use this version for testing on desktop. It will not work with Android.**
 To build an Android-compatible version, you need the Android SDK. You can either let Github Actions handle this, or set it up yourself. See steps below.
@@ -14,7 +14,7 @@ This repository is set up with Github Actions CI to automatically build the mod 
 To get a jar file that works for every platform, do the following:
 1. Make a Github repository with your mod name, and upload the contents of this repo to it. Perform any modifications necessary, then commit and push. 
 2. Check the "Actions" tab on your repository page. Select the most recent commit in the list. If it completed successfully, there should be a download link under the "Artifacts" section. 
-3. Click the download link (should be the name of your repo). This will download a **zipped jar** - **not** the jar file itself [2]! Unzip this file and import the jar contained within in Mindustry. This version should work both on Android and Desktop.
+3. Click the download link (should be the name of your repo). Import the jar contained within in Mindustry. This version should work both on Android and Desktop.
 
 ## Building Locally
 
@@ -27,4 +27,3 @@ Building locally takes more time to set up, but shouldn't be a problem if you've
 --- 
 
 *[1]* *On Linux/Mac it's `./gradlew`, but if you're using Linux I assume you know how to run executables properly anyway.*  
-*[2]: Yes, I know this is stupid. It's a Github UI limitation - while the jar itself is uploaded unzipped, there is currently no way to download it as a single file.*
