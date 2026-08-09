@@ -9,9 +9,13 @@ buildscript{
     }
 
     ext{
-        //the build number that this mod is made for
-        mindustryVersion = "v159.5"
-        kotlinVersion = "2.2.0"
+        // Mindustry version to depend on.
+        // Valid values:
+        // - latest: depend on the latest release of mindustry
+        // - be: depend on the very latest commit of mindustry
+        // - v<number>: depend on a specific version
+        mindustryVersion = "v159.7"
+        kotlinVersion = "2.3.20"
         sdkRoot = System.getenv("ANDROID_HOME") ?: System.getenv("ANDROID_SDK_ROOT")
         isWindows = System.getProperty("os.name").toLowerCase().contains("windows")
         modArtifactName = project.name
@@ -29,25 +33,29 @@ sourceSets.main.kotlin.srcDirs = ["src"]
 repositories{
     mavenCentral()
 
-    //Downloads the dependencies JAR file from Mindustry releases
+    //Downloads the dependencies JAR file from Mindustry releases; does not use any real repository. Surprisingly, this is the most reliable option.
     ivy{
-        url 'https://github.com/'
-        patternLayout{artifact '/[organisation]/[module]/releases/download/[revision]/dependencies.jar'}
+        url = 'https://github.com/'
+        patternLayout{ artifact(
+            (mindustryVersion == "latest" ? '/[organisation]/[module]/releases/[revision]/download/dependencies.jar' : //latest stable release
+            mindustryVersion == "be" ? '/[organisation]/[module]/releases/download/master/[revision].jar' : //latest commit (BE)
+            '/[organisation]/[module]/releases/download/[revision]/dependencies.jar')) //specific release
+        }
         metadataSources{ artifact() }
-    }
 
-    //"Latest" option to depend on BE builds.
-    ivy{
-        url 'https://github.com/'
-        patternLayout{artifact '/[organisation]/[module]/releases/download/master/[revision].jar'}
-        metadataSources{ artifact() }
+        content{
+            if(mindustryVersion == "be"){
+                //BE artifact version is always 'latest'
+                includeVersion("Anuken", "MindustryBuilds", "latest")
+            }else{
+                includeVersion("Anuken", "Mindustry", mindustryVersion)
+            }
+        }
     }
 }
 
 dependencies{
-    def useLatest = false //set to "true" to always depend on the newest version of mindustry
-
-    compileOnly useLatest ? "Anuken:MindustryBuilds:latest" : "Anuken:Mindustry:$mindustryVersion"
+    compileOnly mindustryVersion == "be" ? "Anuken:MindustryBuilds:latest" : "Anuken:Mindustry:$mindustryVersion"
 }
 
 tasks.withType(KotlinCompile).configureEach {
@@ -78,7 +86,7 @@ task jarAndroid{
         //dex and desugar files - this requires d8 in your PATH
         def d8 = isWindows ? "d8.bat" : "d8"
 
-        "$d8  $dependencies --min-api 14 --output ${modArtifactName}Android.jar ${modArtifactName}Desktop.jar"
+        "$d8  $dependencies --min-api 21 --output ${modArtifactName}Android.jar ${modArtifactName}Desktop.jar"
                 .execute(null, new File("$buildDir/libs")).waitForProcessOutput(System.out, System.err)
     }
 }
