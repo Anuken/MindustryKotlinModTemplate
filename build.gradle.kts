@@ -14,7 +14,7 @@ buildscript{
 // - latest: depend on the latest release of mindustry
 // - be: depend on the very latest commit of mindustry
 // - v<number>: depend on a specific version
-val mindustryVersion = "v160"
+val mindustryVersion = "v160.3"
 val kotlinVersion = "2.3.20"
 val sdkRoot: String? = System.getenv("ANDROID_HOME") ?: System.getenv("ANDROID_SDK_ROOT")
 val isWindows = System.getProperty("os.name").lowercase().contains("windows")
